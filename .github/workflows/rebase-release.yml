@@ -1,0 +1,18 @@
+name: Rebase the release branch
+on:
+  workflow_dispatch:
+
+jobs:
+  rebase-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }} # see: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+          ref: release-1            # The branch we are checking out to.
+          fetch-depth: 0            # Ensure we fetch all branches.
+
+      - name: Rebase release branch to master
+        run: |
+          git reset origin/main --hard
+          git push origin release-1 -f

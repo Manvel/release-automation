@@ -19,4 +19,13 @@ commit, which diverges from the one on main branch. Meaning we now are pushing 2
 commits on step 6, one of which already exist, but has different HASH.
 
 ## Solution
-Create a CI job that rebases the release branch to the master.
+Create a [CI job that rebases the release branch to the master](/.github/workflows/rebase-release.yml).
+
+## How to use workflow
+
+1. Ensure you [create a personal access
+token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+with the access to the target repository and `contents` permission.
+1. Replace [release-1](/.github/workflows/rebase-release.yml#L12) with your release branch.
+1. Replace [main](/.github/workflows/rebase-release.yml#L17) with your main branch name.
+1. Navigate to the `Actions` tab of your repository, pick `Rebase the release branch` and trigger `Run workflow` on branch.

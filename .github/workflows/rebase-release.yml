@@ -1,0 +1,19 @@
+name: Push commit
+workflow_dispatch:
+
+jobs:
+  rebase-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
+          ref: release-1
+
+      - name: Rebase release branch to master
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git fetch origin main:main
+          git rebase origin/main
+          git push origin release-1 -f
